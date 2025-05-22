@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expertos en Contratación y Gestión Pública del Ecuador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: 'LucideIcons';
+        src: url(https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf) format('truetype');
+      }
+      .lucide {
+        font-family: 'LucideIcons';
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .hero-bg {
+        position: relative; /* Necesario para posicionar el fondo absolutamente dentro */
+        /* Eliminamos el background de degradado */
+        background: none;
+        overflow: hidden; /* Oculta cualquier parte del mosaico que se salga */
+        padding-top: 24px; /* Ajusta el padding superior */
+        padding-bottom: 32px; /* Ajusta el padding inferior */
+        display: flex;
+        flex-direction: column; /* Alinea los elementos verticalmente */
+        justify-content: center; /* Centra verticalmente */
+        align-items: center; /* Centra horizontalmente */
+        text-align: center; /* Asegura que el texto interno esté centrado */
+        color: white; /* Color del texto para que se vea sobre el fondo */
+        /* Otros estilos que tengas para .hero-bg */
+      }
+      .hero-bg-mosaic {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Coloca el mosaico detrás del texto */
+      }
+      .hero-bg-mosaic img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ajusta a 'contain' si prefieres no recortar */
+        opacity: 0; /* Inicialmente oculto */
+        transition: opacity 0.8s ease-in-out;
+      }
+      .hero-bg-mosaic img.active {
+        opacity: 1;
+      }
+      .article-card img {
+          aspect-ratio: 16 / 9;
+          object-fit: cover;
+      }
+      /* Styles for Accordion */
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .faq-answer.open {
+        max-height: 500px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+      }
+      .faq-icon {
+        transition: transform 0.3s ease;
+      }
+      .faq-button.open .faq-icon {
+        transform: rotate(180deg);
+      }
+       /* Style for lists in About section */
+      #nosotros ul {
+        list-style: disc;
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+       #nosotros li {
+        margin-bottom: 0.25rem;
+      }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex-1"></div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#inicio" class="text-gray-600 hover:text-blue-600 transition duration-300">Inicio</a>
+                <a href="#servicios" class="text-gray-600 hover:text-blue-600 transition duration-300">Servicios</a>
+                <a href="#nosotros" class="text-gray-600 hover:text-blue-600 transition duration-300">Quiénes Somos</a>
+                <a href="#articulos" class="text-gray-600 hover:text-blue-600 transition duration-300">Blogs y Artículos</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-600 transition duration-300">Preguntas Frecuentes</a>
+                <a href="#recursos" class="text-gray-600 hover:text-blue-600 transition duration-300">Recursos</a>
+                <a href="#contacto" class="text-gray-600 hover:text-blue-600 transition duration-300">Contacto</a>
+                <a href="#contacto" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 shadow">Solicitar Consulta</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <span class="lucide text-2xl">&#xe969;</span> </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#inicio" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Inicio</a>
+            <a href="#servicios" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Servicios</a>
+            <a href="#nosotros" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Quiénes Somos</a>
+            <a href="#articulos" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Blogs y Artículos</a>
+             <a href="#faq" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Preguntas Frecuentes</a>
+             <a href="#recursos" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Recursos</a>
+            <a href="#contacto" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Contacto</a>
+             <a href="#contacto" class="block px-6 py-3 bg-blue-600 text-white text-center font-medium m-4 rounded-lg hover:bg-blue-700 transition duration-300 shadow">Solicitar Consulta</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero-bg text-white py-24 md:py-32">
+            <div class="container mx-auto px-6 text-center relative">
+                <div class="hero-bg-mosaic">
+                    <img src="img/imagen1.jpg" alt="Imagen de fondo del hero 1" class="active">
+                    <img src="img/imagen2.jpg" alt="Imagen de fondo del hero 2">
+                    <img src="img/imagen3.jpg" alt="Imagen de fondo del hero 3">
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight z-10">Expertos en Contratación y Gestión Pública del Ecuador</h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-100 z-10">Navegando la complejidad de la normativa ecuatoriana para el éxito de sus proyectos.</p>
+                <a href="#servicios" class="bg-yellow-400 text-black font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-yellow-500 transition duration-300 text-lg z-10">Descubra Nuestros Servicios</a>
+            </div>
+        </section>
+
+        <section id="servicios" class="py-16 md:py-24 bg-white">
+             <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Nuestros Servicios Especializados</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200">
+                        <div class="flex items-center mb-4">
+                           <span class="lucide text-3xl text-blue-600 mr-3">&#xea11;</span> <h3 class="text-xl font-semibold text-gray-700">Asesoría en Responsabilidades en Contratación Pública</h3>
+                        </div>
+                        <p class="text-gray-600">Brindamos acompañamiento técnico-jurídico a los servidores públicos, así como a los proveedores, respecto de las responsabilidades administrativas, civiles, e indicios de responsabilidad penal determinadas por la Contraloría General del Estado.</p>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            <span class="lucide text-3xl text-blue-600 mr-3">&#xe9e3;</span> <h3 class="text-xl font-semibold text-gray-700">Consultoría en Gestión Pública</h3>
+                        </div>
+                        <p class="text-gray-600">Optimización de procesos, planificación estratégica, y mejora del desempeño para instituciones gubernamentales.</p>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200">
+                         <div class="flex items-center mb-4">
+                            <span class="lucide text-3xl text-blue-600 mr-3">&#xe963;</span> <h3 class="text-xl font-semibold text-gray-700">Auditoría y Cumplimiento Normativo</h3>
+                        </div>
+                        <p class="text-gray-600">Verificación del cumplimiento de leyes, reglamentos y normativas aplicables a la gestión y contratación pública.</p>
+                    </div>
+                     <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200">
+                         <div class="flex items-center mb-4">
+                            <span class="lucide text-3xl text-blue-600 mr-3">&#xeae3;</span> <h3 class="text-xl font-semibold text-gray-700">Capacitación Especializada</h3>
+                        </div>
+                        <p class="text-gray-600">Programas de formación para funcionarios públicos y empresas sobre la Ley Orgánica del Sistema Nacional de Contratación Pública (LOSNCP) y su reglamento.</p>
+                    </div>
+                     <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200">
+                         <div class="flex items-center mb-4">
+                            <span class="lucide text-3xl text-blue-600 mr-3">&#xe9e1;</span> <h3 class="text-xl font-semibold text-gray-700">Resolución de Controversias</h3>
+                        </div>
+                         <p class="text-gray-600">Asistencia en reclamaciones administrativas, recursos y otros mecanismos de solución de disputas en contratación pública.</p>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="py-16 md:py-24 bg-gray-100">
+             <div class="container mx-auto px-6 flex flex-col md:flex-row items-start">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
+                     <img src="https://placehold.co/600x400/e2e8f0/334155?text=Consultores+Expertos" alt="Equipo de Consultores Expertos en Ecuador" class="rounded-lg shadow-lg w-full"
+                          onerror="this.onerror=null; this.src='https://placehold.co/600x400/e2e8f0/334155?text=Imagen+no+disponible';">
+                </div>
+                <div class="md:w-1/2 text-gray-700">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Quiénes Somos</h2>
+                     <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">Johnny Byron Morán Ambuludí</h3>
+                        <p class="text-md font-medium mb-4">Ingeniero en Administración de Empresas - Especialista en Contratación Pública y Modernización del Estado</p>
+                        <p class="mb-4 text-sm">Con más de 20 años de experiencia profesional, soy un especialista en gestión de contratos, administración pública y proyectos de gran envergadura. Mi formación académica incluye una Especialización Superior en Contratación Pública y Modernización del Estado de la Universidad Andina Simón Bolívar y una Ingeniería en Administración de Empresas de la Universidad Central del Ecuador.</p>
+                        <p class="mb-2 text-sm"><strong>Áreas de especialización:</strong></p>
+                        <ul class="mb-4 text-sm">
+                            <li>Administración de contratos complejos en sectores estratégicos (minería, petróleo, construcción)</li>
+                            <li>Gestión administrativa y dirección de equipos multidisciplinarios</li>
+                            <li>Contratación pública y fiscalización de proyectos gubernamentales</li>
+                            <li>Asesoría en materia de responsabilidades administrativas y prevención de riesgos legales</li>
+                        </ul>
+                        <p class="mb-2 text-sm"><strong>Experiencia destacada:</strong></p>
+                        <ul class="mb-4 text-sm">
+                            <li>Director Administrativo - Municipio de El Chaco, Napo</li>
+                            <li>Coordinador Senior de Administración de Contratos - Lundin Gold (Proyecto Aurífero)</li>
+                            <li>Contract-Manager - Sacyr Industrial (Ampliación Planta Cementos Chimborazo)</li>
+                            <li>Administrador de Contrato - Constructora Odebrecht y PDVSA</li>
+                            <li>Director Administrativo y Adquisiciones - Refinería del Pacífico</li>
+                            <li>Especialista en Contratación Pública – Cancillería</li>
+                            <li>Especialista en Supervisión de Empresas – Fondo de Solidaridad</li>
+                            <li>Coordinador Administrativo – Consejo Provincial de Pichincha</li>
+                        </ul>
+                        <p class="mb-2 text-sm"><strong>Valor añadido:</strong></p>
+                        <p class="mb-2 text-sm">Como instructor certificado por la SETEC y el Ministerio de Trabajo, ofrezco capacitaciones especializadas en compras públicas y prevención de responsabilidades ante organismos de control, combinando conocimiento teórico con experiencia práctica en proyectos de alta complejidad.</p>
+                        <p class="text-sm">Mi enfoque profesional se centra en garantizar una administración eficiente de recursos, gestión efectiva de procesos contractuales y optimización de operaciones institucionales, en cumplimiento del marco normativo vigente.</p>
+                    </div>
+                    <hr class="my-8 border-gray-300">
+                     <div>
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">José Alejandro Morán Ambuludí</h3>
+                        <p class="text-md font-medium mb-4">Ingeniero en Finanzas - Especialista en Auditoría y Control Gubernamental</p>
+                        <p class="mb-4 text-sm">Con más de 30 años de experiencia en auditoría interna y control gubernamental, soy un profesional especializado en gestión pública, fiscalización y evaluación de procesos institucionales. Mi formación como Ingeniero en Finanzas de la Universidad Central del Ecuador respalda mi trayectoria en diversos organismos estatales de alta relevancia.</p>
+                        <p class="mb-2 text-sm"><strong>Áreas de especialización:</strong></p>
+                        <ul class="mb-4 text-sm">
+                            <li>Auditoría gubernamental y evaluación de control interno</li>
+                            <li>Supervisión y jefatura de equipos de auditoría</li>
+                            <li>Análisis financiero y contabilidad gubernamental</li>
+                            <li>Evaluación de sistemas de contratación pública</li>
+                        </ul>
+                        <p class="mb-2 text-sm"><strong>Experiencia destacada:</strong></p>
+                        <ul class="mb-4 text-sm">
+                            <li>Especialista de Auditoría - Instituto Nacional de Investigaciones</li>
+                            <li>Especialista de Auditoría - Contraloría General del Estado</li>
+                            <li>Auditor Interno Supervisor - Ministerio de Energía y Recursos</li>
+                            <li>Director de Auditoría Interna (Encargado) - Secretaría de Hidrocarburos</li>
+                            <li>Auditor Interno - Ministerio de Industrias y Productividad (19 años)</li>
+                        </ul>
+                        <p class="mb-2 text-sm"><strong>Valor profesional:</strong></p>
+                        <p class="text-sm">Mi amplia trayectoria en instituciones públicas y mi formación continua en áreas como control gubernamental, contabilidad, normativa de contratación pública y auditoría forense me permiten ofrecer un enfoque integral para la identificación y resolución de problemas en la administración pública. Me distingo por mi capacidad de liderazgo, trabajo en equipo, y conocimiento profundo de los procesos de fiscalización y control gubernamental.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="articulos" class="py-16 md:py-24 bg-white">
+             <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Blogs y Artículos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                     <div class="bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200 overflow-hidden article-card">
+                        <img src="https://placehold.co/600x338/d1d5db/4b5563?text=Análisis+LOSNCP" alt="Análisis sobre la LOSNCP" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x338/d1d5db/4b5563?text=Imagen+no+disponible';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-3">Últimas Reformas a la LOSNCP: ¿Qué Significan?</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Un breve análisis de los cambios recentes en la Ley Orgánica del Sistema Nacional de Contratación Pública y su impacto...</p>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium transition duration-300">Leer más <span class="lucide text-sm">&#xe900;</span></a>
+                        </div>
+                    </div>
+                     <div class="bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200 overflow-hidden article-card">
+                         <img src="https://placehold.co/600x338/d1d5db/4b5563?text=Gestión+Pública+Eficiente" alt="Gestión Pública Eficiente" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x338/d1d5db/4b5563?text=Imagen+no+disponible';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-3">Claves para una Gestión Pública Eficiente en Ecuador</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Exploramos principios y herramientas fundamentales para mejorar la eficiencia y transparencia en las entidades públicas...</p>
+                             <a href="#" class="text-blue-600 hover:text-blue-800 font-medium transition duration-300">Leer más <span class="lucide text-sm">&#xe900;</span></a>
+                        </div>
+                    </div>
+                     <div class="bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200 overflow-hidden article-card">
+                         <img src="https://placehold.co/600x338/d1d5db/4b5563?text=Responsabilidad+CGE" alt="Responsabilidad Contraloría" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x338/d1d5db/4b5563?text=Imagen+no+disponible';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-3">Responsabilidades ante la Contraloría: Guía Práctica</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Entendiendo los tipos de responsabilidades (administrativas, civiles, penales) y cómo afrontar los procesos de control...</p>
+                             <a href="#" class="text-blue-600 hover:text-blue-800 font-medium transition duration-300">Leer más <span class="lucide text-sm">&#xe900;</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-16 md:py-24 bg-gray-100">
+             <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Preguntas Frecuentes</h2>
+                <div class="max-w-3xl mx-auto space-y-6">
+                     <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Procedimientos Dinámicos</h3>
+                         <div class="space-y-4">
+                              <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Qué caracteriza a un Procedimiento Dinámico?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Los procedimientos dinámicos, como el Catálogo Electrónico y la Subasta Inversa, se caracterizan por ser ágiles y utilizar herramientas electrónicas para la interacción continua entre la entidad contratante y los proveedores, permitiendo actualizaciones de precios y ofertas en tiempo real o de forma periódica.
+                                </div>
+                            </div>
+                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Cómo se actualizan los precios en el Catálogo Electrónico?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Los precios en el Catálogo Electrónico pueden actualizarse periódicamente a través de procesos definidos por el SERCOP o mediante negociaciones, buscando reflejar las condiciones del mercado y asegurar el mejor costo para el Estado.
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2 mt-6">Procedimientos Comunes</h3>
+                        <div class="space-y-4">
+                              <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Cuándo se utiliza el procedimiento de Subasta Inversa Electrónica?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Se utiliza para la adquisición de bienes y servicios normalizados que no consten en el Catálogo Electrónico, donde el factor predominante es el precio. Los proveedores pujan hacia la baja.
+                                </div>
+                            </div>
+                            <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Qué diferencia hay entre Cotización y Licitación?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Ambos se usan para bienes, servicios u obras no normalizados. La Cotización aplica para montos menores que la Licitación. La Licitación es más formal y se usa para contrataciones de mayor cuantía según lo establecido en la normativa.
+                                </div>
+                            </div>
+                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Cómo funciona el Catálogo Electrónico?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Es una tienda virtual donde las entidades públicas adquieren bienes y servicios normalizados directamente de proveedores previamente calificados por el SERCOP, agilizando la compra.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2 mt-6">Procedimientos Especiales</h3>
+                         <div class="space-y-4">
+                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿En qué casos se aplica la Contratación por Emergencia?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Se aplica en situaciones de emergencia comprobada (desastres naturales, conmoción interna, etc.) que requieran acciones inmediatas para evitar daños graves a personas, bienes o el ambiente. Permite una contratación directa y expedita bajo condiciones específicas.
+                                </div>
+                            </div>
+                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Cómo se contrata la Comunicación Social?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    La contratación de servicios de comunicación social tiene un procedimiento especial que considera aspectos técnicos, de experiencia y tarifarios específicos del sector, buscando garantizar la idoneidad del proveedor para difundir información de interés público.
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2 mt-6">Procedimientos de Régimen Especial</h3>
+                         <div class="space-y-4">
+                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Qué son las contrataciones de Giro Específico del Negocio?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Son aquellas contrataciones que realizan las empresas públicas o entidades del sector público que operan en mercados competidos, para adquirir bienes o servicios directamente relacionados con su actividad comercial o productiva principal, bajo condiciones de mercado.
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2 mt-6">Otros Temas</h3>
+                         <div class="space-y-4">
+                              <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Ofrecen capacitación sobre el manejo del portal SERCOP (SOCE)?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Sí, dentro de nuestros servicios de Capacitación Especializada, incluimos módulos prácticos sobre el uso eficiente del portal del Sistema Oficial de Contratación del Ecuador (SOCE), tanto para entidades contratantes como para proveedores.
+                                </div>
+                            </div>
+                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Qué tipo de responsabilidades determina la Contraloría General del Estado?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    La Contraloría puede determinar responsabilidades administrativas (sanciones pecuniarias, destitución), responsabilidades civiles culposas (indemnización al Estado por perjuicios económicos) e indicios de responsabilidad penal (que se remiten a la Fiscalía). Nuestra asesoría cubre cómo afrontar estos procesos.
+                                </div>
+                            </div>
+                            <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <button class="faq-button w-full flex justify-between items-center text-left px-6 py-4 focus:outline-none">
+                                    <span class="text-lg font-medium text-gray-700">¿Cómo puedo solicitar una consulta inicial?</span>
+                                    <span class="lucide text-xl text-gray-500 faq-icon">&#xe91a;</span> </button>
+                                <div class="faq-answer text-gray-600 text-sm">
+                                    Puede solicitar una consulta inicial completando el formulario en nuestra sección de "Contáctenos", enviándonos un correo electrónico a jbyronmoran@gmail.com, o llamándonos a los teléfonos 0979212263 / 0981973149. Estaremos gustosos de analizar sus necesidades específicas.
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recursos" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Recursos Esenciales</h2>
+                <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Descargue formatos actualizados, flujogramas de procesos y guías prácticas para facilitar su gestión en la contratación pública.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-200 flex flex-col items-center text-center">
+                        <span class="lucide text-5xl text-blue-600 mb-4">&#xea11;</span> <h3 class="text-lg font-semibold text-gray-700 mb-2">Formato de Oferta (Actualizado)</h3>
+                        <p class="text-gray-600 text-sm mb-4 flex-grow">Modelo referencial actualizado para la presentación de ofertas en procesos de contratación.</p>
+                        <a href="#" download class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition duration-300 shadow inline-flex items-center">
+                            <span class="lucide mr-2 text-sm">&#xe93a;</span> Descargar
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-200 flex flex-col items-center text-center">
+                        <span class="lucide text-5xl text-blue-600 mb-4">&#xea85;</span> <h3 class="text-lg font-semibold text-gray-700 mb-2">Flujograma Subasta Inversa</h3>
+                        <p class="text-gray-600 text-sm mb-4 flex-grow">Diagrama visual del proceso de Subasta Inversa Electrónica, desde la convocatoria hasta la adjudicación.</p>
+                         <a href="#" download class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition duration-300 shadow inline-flex items-center">
+                           <span class="lucide mr-2 text-sm">&#xe93a;</span> Descargar
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-200 flex flex-col items-center text-center">
+                         <span class="lucide text-5xl text-blue-600 mb-4">&#xe90e;</span> <h3 class="text-lg font-semibold text-gray-700 mb-2">Guía Rápida Ínfima Cuantía</h3>
+                        <p class="text-gray-600 text-sm mb-4 flex-grow">Pasos clave y consideraciones importantes para realizar contrataciones bajo el régimen de Ínfima Cuantía.</p>
+                         <a href="#" download class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition duration-300 shadow inline-flex items-center">
+                           <span class="lucide mr-2 text-sm">&#xe93a;</span> Descargar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="py-16 md:py-24 bg-gray-100">
+             <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Contáctenos</h2>
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md border border-gray-200">
+                    <p class="text-center text-gray-600 mb-8">¿Tiene preguntas o necesita asesoría? Complete el formulario o contáctenos directamente.</p>
+                    <form action="#" method="POST">
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-50"> </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-50"> </div>
+                        </div>
+                         <div class="mb-6">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Asunto</label>
+                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-50"> </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-50"></textarea> </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-md">Enviar Mensaje</button>
+                        </div>
+                    </form>
+                    <div class="mt-12 text-center text-gray-600">
+                        <p class="mb-2">También puede contactarnos en:</p>
+                        <p><span class="lucide text-lg mr-1">&#xe9e6;</span> Email: <a href="mailto:jbyronmoran@gmail.com" class="text-blue-600 hover:underline">jbyronmoran@gmail.com</a></p>
+                        <p><span class="lucide text-lg mr-1">&#xea1f;</span> Teléfono: 0979212263 / 0981973149</p>
+                        <p><span class="lucide text-lg mr-1">&#xe9f1;</span> Dirección: Calle Berlín E3-85 y Av. 9 de Octubre, Piso 9, Quito, Ecuador</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-blue-900 text-gray-300 py-12"> <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Consultores Ecuador - Expertos en Contratación y Gestión Pública. Todos los derechos reservados.</p>
+            </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = menuButton.querySelector('.lucide');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.innerHTML = mobileMenu.classList.contains('hidden') ? '&#xe969;' : '&#xea0f;';
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                     mobileMenu.classList.add('hidden');
+                     menuIcon.innerHTML = '&#xe969;';
+                }
+            });
+        });
+
+        // FAQ Accordion
+        const faqButtons = document.querySelectorAll('.faq-button');
+
+        faqButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const isOpen = button.classList.contains('open');
+
+                // Option 1: Close others when one opens
+                faqButtons.forEach(otherButton => {
+                   if (otherButton !== button && otherButton.classList.contains('open')) {
+                       otherButton.classList.remove('open');
+                       otherButton.nextElementSibling.classList.remove('open');
+                   }
+                });
+
+                // Toggle the clicked answer
+                button.classList.toggle('open', !isOpen);
+                answer.classList.toggle('open', !isOpen);
+            });
+        });
+    </script>
+
+</body>
+</html>
